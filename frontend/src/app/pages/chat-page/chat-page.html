@@ -1,0 +1,68 @@
+<div class="chat-page">
+
+  <!-- Header -->
+  <div class="chat-header">
+    <button (click)="goBack()" class="back-btn">Back</button>
+    <div class="header-info" *ngIf="request">
+      <span class="cat-badge">{{ request.category }}</span>
+      <div>
+        <strong>{{ request.category_display }}</strong>
+        <span class="status-pill" [class]="request.status.toLowerCase()">{{ request.status_display }}</span>
+      </div>
+    </div>
+    <button *ngIf="canComplete()" (click)="completeRequest()" class="complete-btn">Complete</button>
+  </div>
+
+  <!-- Messages -->
+  <div class="messages-wrap">
+    <div class="empty-chat" *ngIf="messages.length === 0">
+      <p>Send the first message</p>
+    </div>
+
+    <div
+      class="message"
+      *ngFor="let m of messages"
+      [class.own]="isOwnMessage(m)">
+      <div class="bubble">
+        <p class="msg-text">{{ m.content }}</p>
+        <span class="msg-time">{{ m.timestamp | date:'HH:mm' }}</span>
+      </div>
+    </div>
+    <div #messagesEnd></div>
+  </div>
+
+  <!-- Rating banner -->
+  <div class="rating-done" *ngIf="ratingDone">
+    Rating submitted. Thank you!
+  </div>
+
+  <!-- Input -->
+  <div class="chat-input-row">
+    <input
+      type="text"
+      [(ngModel)]="newMessage"
+      placeholder="Message..."
+      (keyup.enter)="sendMessage()"
+      class="msg-input" />
+    <button (click)="sendMessage()" class="send-btn" [disabled]="!newMessage.trim() || sending">
+      &rsaquo;
+    </button>
+  </div>
+
+  <!-- Rating modal -->
+  <div class="overlay" *ngIf="showRating">
+    <div class="rating-modal">
+      <h3>Rate this ride</h3>
+      <div class="stars">
+        <button
+          *ngFor="let s of [1,2,3,4,5]"
+          class="star"
+          [class.active]="s <= ratingScore"
+          (click)="ratingScore = s">&#9733;</button>
+      </div>
+      <textarea [(ngModel)]="ratingComment" placeholder="Comment (optional)" rows="3"></textarea>
+      <button (click)="submitRating()" class="submit-rating">Submit rating</button>
+    </div>
+  </div>
+
+</div>

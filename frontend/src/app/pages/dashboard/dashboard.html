@@ -1,0 +1,34 @@
+<div class="bike-container">
+  <div class="bike-box">
+    <div class="box-header">
+      <h2>MOTOHELP</h2>
+      <p>Add your motorcycle</p>
+    </div>
+    <div class="box-body">
+      <form (ngSubmit)="saveBikeInfo()">
+        <input type="text" placeholder="Brand (Yamaha, Honda...)" [(ngModel)]="brand" name="brand" required />
+        <input type="text" placeholder="Model (R1, CBR600...)" [(ngModel)]="model" name="model" required />
+
+        <select [(ngModel)]="color" name="color" required>
+          <option value="" disabled selected>Select color</option>
+          <option>Black</option>
+          <option>White</option>
+          <option>Red</option>
+          <option>Blue</option>
+          <option>Gray</option>
+          <option>Yellow</option>
+          <option>Green</option>
+          <option>Orange</option>
+        </select>
+
+        <input type="text" placeholder="Plate number (40 09BL)" [(ngModel)]="plateNumber" name="plateNumber" maxlength="10" required />
+
+        <button type="submit" [disabled]="loading">
+          {{ loading ? 'Saving...' : 'Save and continue' }}
+        </button>
+
+        <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      </form>
+    </div>
+  </div>
+</div>

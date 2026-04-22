@@ -1,0 +1,180 @@
+<header id="home">
+  <nav>
+    <div class="nav__header">
+      <div class="nav__logo">
+        <a href="#home">MOTOHELP</a>
+      </div>
+
+      <div class="nav__menu__btn" (click)="toggleMenu()">
+        <i [class]="isOpen ? 'ri-close-line' : 'ri-menu-line'"></i>
+      </div>
+    </div>
+
+    <ul class="nav__links" [class.open]="isOpen">
+      <li><a href="#home" (click)="toggleMenu()">Home</a></li>
+      <li><a href="#about" (click)="toggleMenu()">About Us</a></li>
+      <li><a href="#services" (click)="toggleMenu()">Services</a></li>
+      <li><a href="#subscribe" (click)="toggleMenu()">Subscribe</a></li>
+    </ul>
+
+    <div class="nav__btn">
+      <button class="btn" (click)="goToLogin()">Get Started</button>
+    </div>
+  </nav>
+
+  <div class="header__container">
+    <h1>NEED HELP ON THE ROAD?</h1>
+    <img src="assets/motomoto-Photoroom.png" alt="header">
+  </div>
+
+  <a href="#about" class="scroll__down">
+    <i class="ri-arrow-down-line"></i>
+  </a>
+</header>
+
+
+<section id="about" class="section__container location__container">
+  <div class="location__image">
+    <img src="assets/location.png" alt="location">
+  </div>
+
+  <div class="location__content">
+    <h2 class="section__header">ABOUT MOTOHELP</h2>
+    <p>
+      MotoHelp is a platform created for riders who believe in community and support on the road.
+      We know that anything can happen during a ride — a flat tire, empty fuel tank, or unexpected breakdown.
+      Instead of waiting for expensive services or being stuck alone, MotoHelp connects you with nearby riders who are ready to help.
+      With just one click, you can send an SOS signal and instantly notify bikers around you.
+      Those nearby can respond, navigate to your location, and offer real help when you need it most.
+      MotoHelp is more than just an app — it’s a community built on trust, speed, and real human connection.
+      Riders helping riders, anytime and anywhere.
+    </p>
+  </div>
+</section>
+
+
+<section id="services" class="section__container range__container">
+  <h2 class="section__header">HELP AROUND YOU</h2>
+
+  <div class="range__grid">
+
+    <div class="range__card">
+      <img src="assets/sos.png" alt="SOS">
+      <div class="range__details">
+        <h4>SOS</h4>
+        <a href="#"><i class="ri-arrow-right-line"></i></a>
+      </div>
+    </div>
+
+    <div class="range__card">
+      <img src="assets/map.png" alt="Request">
+      <div class="range__details">
+        <h4>REQUEST</h4>
+        <a href="#"><i class="ri-arrow-right-line"></i></a>
+      </div>
+    </div>
+
+    <div class="range__card">
+      <img src="assets/community.png" alt="Rating">
+      <div class="range__details">
+        <h4>RATING</h4>
+        <a href="#"><i class="ri-arrow-right-line"></i></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="section__container story__container">
+        <h2 class="section__header">TOP 3 RIDERS OF THE MONTH</h2>
+        <div class="story__grid">
+            <div class="story__card">
+                <div class="story__date">
+                    <span>1🥇</span>
+                    <div>
+                        <p>April</p>
+                        <p>2026</p>
+                    </div>              
+                </div>
+                <h4>Kazygul Nurzhan</h4>
+                <p>
+                    Helped 15 riders this month by responding to SOS signals and providing fuel and basic repairs on the road. 
+                <img src="assets/nurzhan.png" alt="story">
+            </div>
+            <div class="story__card">
+                <div class="story__date">
+                    <span>2🥈</span>
+                    <div>
+                        <p>April</p>
+                        <p>2026</p>
+                    </div>              
+                </div>
+                <h4>Tlektes Ibrahhim</h4>
+                <p>
+                    Responded to 11 emergency requests and assisted riders with navigation and quick fixes. Known for fast response and reliability.
+                </p>
+                <img src="assets/Ibra.png" alt="story">
+            </div>
+            <div class="story__card">
+                <div class="story__date">
+                    <span>3🥉</span>
+                    <div>
+                        <p>April</p>
+                        <p>2026</p>
+                    </div>              
+                </div>
+                <h4>Zhanbolatuly Bekasyl</h4>
+                <p>
+                    Helped 9 riders by sharing tools and support on the road. Active community member who never ignores a call for help.
+                <img src="assets/beka.png" alt="story">
+            </div>
+        </div>
+    </section>
+
+
+<section class="download">
+  <div class="section__container download__container">
+
+    <div class="download__content">
+      <h2 class="section__header">MOTOHELP YOUR ROAD ASSISTANT</h2>
+
+      <div class="download__links">
+        <a href="#"><img src="assets/apple.png" alt="App Store"></a>
+        <a href="#"><img src="assets/google.png" alt="Google Play"></a>
+      </div>
+    </div>
+
+    <div class="download__image">
+      <img src="assets/download.png" alt="Download App">
+    </div>
+
+  </div>
+</section>
+
+<section id="subscribe" class="footer">
+
+  <div class="social-icons">
+
+    <a href="https://instagram.com/" target="_blank">
+      <i class="ri-instagram-line"></i>
+    </a>
+
+    <a href="https://vt.tiktok.com/ZS9172Hup/" target="_blank">
+      <i class="ri-tiktok-fill"></i>
+    </a>
+
+    <a href="https://youtu.be/6_VlZuPDOSM?si=dvhXJ9ZJOTPhppR8" target="_blank">
+      <i class="ri-youtube-fill"></i>
+    </a>
+
+  </div>
+
+  <div class="footer-links">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#subscribe">Contact</a>
+  </div>
+
+  <p>© 2026 MotoHelp. All rights reserved.</p>
+
+</section>

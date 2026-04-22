@@ -1,0 +1,41 @@
+<div class="notif-page">
+  <nav class="top-nav">
+    <a routerLink="/map" class="back-btn">Back</a>
+    <h2>NEARBY REQUESTS</h2>
+    <span></span>
+  </nav>
+
+  <div class="content">
+    <div class="loading" *ngIf="loading">Searching for requests...</div>
+
+    <div class="empty" *ngIf="!loading && requests.length === 0">
+      <div class="empty-icon">MOTO</div>
+      <p>No active requests nearby</p>
+      <small>Updates every 15 seconds</small>
+    </div>
+
+    <div class="request-card" *ngFor="let r of requests">
+      <div class="card-header">
+        <span class="cat-badge">{{ r.category }}</span>
+        <div class="card-info">
+          <strong>{{ r.category_display }}</strong>
+          <span class="distance">{{ r.distance_km }} km away</span>
+        </div>
+        <span class="time">{{ r.created_at | date:'HH:mm' }}</span>
+      </div>
+
+      <div class="card-body">
+        <div class="rider-row">
+          <img src="assets/motomoto-Photoroom.png" class="avatar" alt="avatar" />
+          <div>
+            <p class="rider-name">{{ r.requester.username }}</p>
+            <p class="rider-rating" *ngIf="r.requester.rating_count > 0">{{ r.requester.rating | number:'1.1-1' }} / 5</p>
+          </div>
+        </div>
+        <p class="description" *ngIf="r.description">{{ r.description }}</p>
+      </div>
+
+      <button class="accept-btn" (click)="accept(r)">Help this rider</button>
+    </div>
+  </div>
+</div>

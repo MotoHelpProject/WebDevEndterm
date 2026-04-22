@@ -1,0 +1,84 @@
+<div class="map-page">
+
+  <!-- Navbar -->
+  <nav class="map-nav">
+    <span class="logo">MOTOHELP</span>
+    <div class="nav-right">
+      <span class="username">{{ user?.username }}</span>
+      <a routerLink="/notifications" class="nav-btn">
+        Requests
+        <span class="badge" *ngIf="nearbyRequests.length > 0">{{ nearbyRequests.length }}</span>
+      </a>
+      <a routerLink="/profile" class="nav-btn">Profile</a>
+      <button (click)="logout()" class="nav-btn logout">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Map -->
+  <div id="leaflet-map"></div>
+
+  <!-- Active request banner -->
+  <div class="active-banner" *ngIf="myActiveRequest">
+    <span class="cat-badge">{{ myActiveRequest.category }}</span>
+    <div class="banner-info">
+      <strong>{{ myActiveRequest.category_display }}</strong>
+      <span class="status-pill" [class]="myActiveRequest.status.toLowerCase()">{{ myActiveRequest.status_display }}</span>
+    </div>
+    <div class="banner-actions">
+      <button *ngIf="myActiveRequest.status === 'ACCEPTED'" (click)="goToChat()" class="btn-chat">Chat</button>
+      <button (click)="cancelRequest()" class="btn-cancel">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Nearby sidebar -->
+  <div class="nearby-sidebar" *ngIf="nearbyRequests.length > 0 && !myActiveRequest">
+    <h4>Nearby requests</h4>
+    <div class="nearby-item" *ngFor="let r of nearbyRequests" routerLink="/notifications">
+      <span class="ni-badge">{{ r.category }}</span>
+      <div class="ni-info">
+        <p>{{ r.category_display }}</p>
+        <small>{{ r.requester.username }} · {{ r.distance_km }} km</small>
+      </div>
+      <span class="ni-arrow">›</span>
+    </div>
+  </div>
+
+  <!-- SOS Button -->
+  <button class="sos-btn" *ngIf="!myActiveRequest" (click)="showSosPanel = true">
+    NEED HELP
+  </button>
+
+  <!-- SOS Panel overlay -->
+  <div class="sos-overlay" *ngIf="showSosPanel" (click)="showSosPanel = false">
+    <div class="sos-panel" (click)="$event.stopPropagation()">
+      <h3>Select help type</h3>
+
+      <div class="category-grid">
+        <button
+          *ngFor="let cat of categories"
+          class="cat-btn"
+          [class.selected]="selectedCategory === cat.value"
+          (click)="selectedCategory = cat.value">
+          <span class="cat-label">{{ cat.label }}</span>
+        </button>
+      </div>
+
+      <textarea
+        [(ngModel)]="sosDescription"
+        placeholder="Describe your situation (optional)"
+        rows="3">
+      </textarea>
+
+      <div class="panel-actions">
+        <button class="btn-secondary" (click)="showSosPanel = false">Cancel</button>
+        <button
+          class="btn-primary"
+          (click)="submitSos()"
+          [disabled]="!selectedCategory || sosLoading">
+          {{ sosLoading ? 'Sending...' : 'Send request' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

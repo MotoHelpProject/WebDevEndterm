@@ -1,0 +1,62 @@
+<div class="profile-page">
+  <nav class="top-nav">
+    <a routerLink="/map" class="back-btn">Back</a>
+    <h2>PROFILE</h2>
+    <button (click)="logout()" class="logout-btn">Logout</button>
+  </nav>
+
+  <div class="content" *ngIf="user">
+
+    <!-- User info -->
+    <div class="user-card">
+      <div class="avatar-wrap">
+        <img src="assets/motomoto-Photoroom.png" class="avatar" alt="avatar" />
+      </div>
+      <div class="user-info">
+        <h3>{{ user.username }}</h3>
+        <p class="email">{{ user.email }}</p>
+        <p class="phone" *ngIf="user.phone">{{ user.phone }}</p>
+        <div class="rating-row" *ngIf="user.rating_count > 0">
+          <span class="star" *ngFor="let s of getStars(user.rating)">&#9733;</span>
+          <span class="rating-num">{{ user.rating | number:'1.1-1' }} ({{ user.rating_count }} ratings)</span>
+        </div>
+        <span class="no-rating" *ngIf="user.rating_count === 0">No ratings yet</span>
+      </div>
+    </div>
+
+    <!-- Transport -->
+    <div class="section-card">
+      <div class="section-header">
+        <h4>MOTORCYCLE</h4>
+        <button (click)="editMode = !editMode" class="edit-btn">
+          {{ editMode ? 'Cancel' : 'Edit' }}
+        </button>
+      </div>
+
+      <div *ngIf="!editMode && transport">
+        <div class="transport-details">
+          <div class="detail-row"><span>Brand</span><strong>{{ transport.brand }}</strong></div>
+          <div class="detail-row"><span>Model</span><strong>{{ transport.model }}</strong></div>
+          <div class="detail-row"><span>Color</span><strong>{{ transport.color }}</strong></div>
+          <div class="detail-row"><span>Plate</span><strong>{{ transport.plate_number }}</strong></div>
+        </div>
+      </div>
+
+      <div *ngIf="!transport && !editMode" class="no-transport">
+        No motorcycle added. <a routerLink="/dashboard">Add now</a>
+      </div>
+
+      <form *ngIf="editMode" (ngSubmit)="saveTransport()">
+        <input type="text" [(ngModel)]="brand" name="brand" placeholder="Brand" />
+        <input type="text" [(ngModel)]="model" name="model" placeholder="Model" />
+        <input type="text" [(ngModel)]="color" name="color" placeholder="Color" />
+        <input type="text" [(ngModel)]="plateNumber" name="plateNumber" placeholder="Plate number" />
+        <button type="submit" class="save-btn">Save</button>
+        <p class="save-msg" *ngIf="saveMsg">{{ saveMsg }}</p>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="loading" *ngIf="!user">Loading...</div>
+</div>
